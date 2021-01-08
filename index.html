@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang=“pt-br”>
+	<head>
+		<title>Teste seu IMC</title>
+		<meta charset=“UTF-8”>
+		<link rel="stylesheet" href="style.css">
+		<script>
+			function imc() {
+    			valt_tmp = document.f_imc.f_alt.value;
+				vpes_tmp = document.f_imc.f_pes.value;
+
+				if ((valt_tmp == 0) || (vpes_tmp == 0)) {
+					alert("Digite o peso ou altura");
+				} else {
+					valt = valt_tmp.replace(",", ".");
+					vpes = vpes_tmp.replace(",", ".");
+
+					vimc = (vpes / Math.pow(valt, 2)).toFixed(1);
+					alert("O IMC é: " + vimc);
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<h1>
+			Teste seu IMC
+		</h1>
+        <table border="5" cellspacing="5">
+
+			<tr>
+				<th width="200">Condição</th><th width="100">Mulheres</th><th width="100">Homens</th>
+			</tr>
+			<tr>
+				<td>Abaixo do peso</td><td> < 19,1 </td><td> < 20,7 </td>
+			</tr>
+			<tr>
+				<td>Normal</td><td> 19,1 - 25,8 </td><td> 20,7 - 26,4 </td>
+			</tr>
+			<tr>
+				<td>Pouco acima do peso</td><td> 25,9 - 27,3 </td><td> 26,5 - 27,8 </td>
+			</tr>
+			<tr>
+				<td>Acima do peso</td><td> 27,4 - 32,3 </td><td> 27,9 - 31,1 </td>
+			</tr>
+			<tr>
+				<td>Obeso</td><td> > 32,3  </td><td> > 31,1 </td>
+			</tr>
+        </table>
+        <br/>
+		<form name="f_imc">
+			<label id="text">Altura (m)</label><br/>
+			<input type="text" name="f_alt" placeholder="ex: 1,50"><br/><br/>
+			<label id="text">Peso (kg)</label><br/>
+			<input type="text" name="f_pes" placeholder="ex: 50"><br/><br/>
+			<input class="resultado" type="button" value="Calcular" onclick="imc()">
+		</form>
+		<br/>
+	</body>
+</html>
