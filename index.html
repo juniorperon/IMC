@@ -4,26 +4,11 @@
 		<title>Teste seu IMC</title>
 		<meta charset=“UTF-8”>
 		<link rel="stylesheet" href="style.css">
-		<script>
-			function imc() {
-    			valt_tmp = document.f_imc.f_alt.value;
-				vpes_tmp = document.f_imc.f_pes.value;
-
-				if ((valt_tmp == 0) || (vpes_tmp == 0)) {
-					alert("Digite o peso ou altura");
-				} else {
-					valt = valt_tmp.replace(",", ".");
-					vpes = vpes_tmp.replace(",", ".");
-
-					vimc = (vpes / Math.pow(valt, 2)).toFixed(1);
-					alert("O IMC é: " + vimc);
-				}
-			}
-		</script>
+		
 	</head>
 
 	<body>
-		<h1>
+		<h1 style="font-size: 50px;">
 			Teste seu IMC
 		</h1>
         <table border="5" cellspacing="5">
@@ -46,9 +31,14 @@
 			<tr>
 				<td>Obeso</td><td> > 32,3  </td><td> > 31,1 </td>
 			</tr>
-        </table>
-        <br/>
+		</table>
+				<h2 id="nome">&nbsp;</h2>
+			
 		<form name="f_imc">
+			<input type="radio" name="opcao" value="Feminino" id="f">Feminino
+			<input type="radio" name="opcao" value="Masculino" id="m">Masculino
+			<br/>
+			<br/>
 			<label id="text">Altura (m)</label><br/>
 			<input type="text" name="f_alt" placeholder="ex: 1,50"><br/><br/>
 			<label id="text">Peso (kg)</label><br/>
@@ -57,4 +47,82 @@
 		</form>
 		<br/>
 	</body>
+	<script>
+		//Colocar nome da pessoa na tela
+		var pessoa;
+
+		function definirNome(texto) {
+			  document.getElementById('nome').innerHTML = texto;
+		}
+
+		pessoa = prompt("Qual é o seu nome?");
+
+		definirNome(pessoa);
+
+		// teste para sexo masculino ou feminino
+		var sexo = "indefinido";
+		function escolha() {	
+			var m = document.getElementById("m");
+			var	f = document.getElementById("f");
+			
+			if(m.checked) {
+				sexo = m.value;
+			} else if (f.checked) {
+				sexo = f.value;
+			} else {
+				alert("Selecione uma opção");
+			}
+		}
+
+		//calculo imc
+		function imc() {
+			valt_tmp = document.f_imc.f_alt.value;
+			vpes_tmp = document.f_imc.f_pes.value;
+			escolha();
+			if(sexo == "indefinido") {
+				//se não for selecionado nenhuma opção aparece um alerta
+			} else
+
+				//testa se esta preenchido os campos
+				if ((valt_tmp == 0 ) || (vpes_tmp == 0)) {
+					alert("Digite o peso ou altura"); 
+				} else {
+					// faz os calculos (pode dar NaN se digitar letras)
+					valt = valt_tmp.replace(",", ".");
+					vpes = vpes_tmp.replace(",", ".");
+					vimc = (vpes / Math.pow(valt, 2)).toFixed(1);
+
+					//mostra o imc calculado
+					alert("O IMC é: " + vimc);
+					//entra no "if" imc feminino
+					if(f.checked) {
+						alert(f.value);
+						if(vimc >= 32.3) {
+							alert("Você está obesa");
+						} else if (vimc >=27.4) {
+							alert("Você está acima do peso");
+						} else if (vimc >=25.9) {
+							alert("Você está pouco acima do peso");
+						} else if (vimc >=19.1) {
+							alert("Você está normal");
+						} else 
+							alert("Você está abaixo do peso");
+
+						//senão entra no "if" imc masculino
+						} else if (m.checked) {
+							alert(m.value);
+							if(vimc >= 31.1) {
+								alert("Você está obeso");
+							} else if (vimc >=27.9) {
+								alert("Você está acima do peso");
+							} else if (vimc >=26.5) {
+								alert("Você está pouco acima do peso");
+							} else if (vimc >=20.7) {
+								alert("Você está normal");
+							} else 
+								alert("Você está abaixo do peso");
+						}
+				}
+		}
+	</script>
 </html>

@@ -5,13 +5,19 @@
     border-color: white;
 }
 
+div {
+    margin-top: 3%;
+    font-size: 30px;
+    color: white;
+}
+
 table {
     margin: auto;
     margin-top: 5%;
 }
 
 form {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 input {
